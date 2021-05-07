@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="COUNTRY_DIM" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="COUTRY_DIM"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="COUNTRY">
+    <resourceUri>COUNTRY</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:HierarchyView" id="Hier" function="HIERARCHY">
+    <viewAttributes>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_RANK"/>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_TREE_SIZE"/>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_PARENT_RANK"/>
+      <viewAttribute datatype="INTEGER" id="HIERARCHY_LEVEL"/>
+      <viewAttribute datatype="TINYINT" id="HIERARCHY_IS_CYCLE"/>
+      <viewAttribute datatype="TINYINT" id="HIERARCHY_IS_ORPHAN"/>
+      <viewAttribute datatype="NVARCHAR" length="100" id="COUNTRY"/>
+      <viewAttribute datatype="NVARCHAR" length="100" id="CONTINENT"/>
+    
+      <viewAttribute datatype="NVARCHAR" length="100" id="PARENT_ID"/>
+      <viewAttribute datatype="NVARCHAR" length="100" id="NODE_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="COUNTRY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONTINENT" source="CONTINENT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_ID" source="CONTINENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NODE_ID" source="COUNTRY"/>
+    </input>
+    <hierarchyParameterization>
+      <startWhere></startWhere>
+      <siblingOrder byAttribute="COUNTRY" direction="ASC" uniqueName="COUNTRY"/>
+      <orphan>ORPHAN_ROOT</orphan>
+    </hierarchyParameterization>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Hier">
+  <attributes>
+    <attribute id="HIERARCHY_RANK" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_RANK"/>
+      <keyMapping columnObjectName="Hier" columnName="HIERARCHY_RANK"/>
+    </attribute>
+    <attribute id="HIERARCHY_TREE_SIZE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_TREE_SIZE"/>
+      <keyMapping columnObjectName="Hier" columnName="HIERARCHY_TREE_SIZE"/>
+    </attribute>
+    <attribute id="HIERARCHY_PARENT_RANK" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_PARENT_RANK"/>
+      <keyMapping columnObjectName="Hier" columnName="HIERARCHY_PARENT_RANK"/>
+    </attribute>
+    <attribute id="HIERARCHY_LEVEL" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_LEVEL"/>
+      <keyMapping columnObjectName="Hier" columnName="HIERARCHY_LEVEL"/>
+    </attribute>
+    <attribute id="HIERARCHY_IS_CYCLE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_IS_CYCLE"/>
+      <keyMapping columnObjectName="Hier" columnName="HIERARCHY_IS_CYCLE"/>
+    </attribute>
+    <attribute id="HIERARCHY_IS_ORPHAN" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_IS_ORPHAN"/>
+      <keyMapping columnObjectName="Hier" columnName="HIERARCHY_IS_ORPHAN"/>
+    </attribute>
+    <attribute id="COUNTRY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="Hier" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="CONTINENT" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CONTINENT"/>
+      <keyMapping columnObjectName="Hier" columnName="CONTINENT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Hier" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

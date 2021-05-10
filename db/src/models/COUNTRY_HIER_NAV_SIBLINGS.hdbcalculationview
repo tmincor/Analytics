@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="COUNTRY_HIER_NAV_SIBLINGS" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="COUNTRY_HIER_NAV_SIBLINGS"/>
+<localVariables>
+  <variable id="IP_1" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="NVARCHAR" length="100" scale="NaN" mandatory="false" defaultValue="United Kingdom">
+      <valueDomain type="AttributeValue">
+        <externalLikeStructureName>COUNTRY_HIER_IP</externalLikeStructureName>
+        <externalLikeStructureType>CALCULATION_VIEW</externalLikeStructureType>
+        <externalLikeElementName>NODE_ID</externalLikeElementName>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="COUNTRY_HIER_IP">
+    <targetVariable name="COUNTRY_HIER_NAV_SIBLINGS" resourceUri="COUNTRY_HIER_IP"/>
+    <localVariable>IP_1</localVariable>
+  </mapping>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="COUNTRY_HIER_IP">
+    <targetVariable name="IP_NODE_ID" resourceUri="COUNTRY_HIER_IP"/>
+    <localVariable>IP_1</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="COUNTRY_HIER">
+    <resourceUri>COUNTRY_HIER</resourceUri>
+  </DataSource>
+  <DataSource id="COUNTRY_HIER_IP">
+    <resourceUri>COUNTRY_HIER_IP</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:HierarchyView" id="Hierarchy_1" function="HIERARCHY_SIBLINGS">
+    <viewAttributes>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_SIBLING_DISTANCE"/>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_RANK"/>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_TREE_SIZE"/>
+      <viewAttribute datatype="BIGINT" id="HIERARCHY_PARENT_RANK"/>
+      <viewAttribute datatype="INTEGER" id="HIERARCHY_LEVEL"/>
+      <viewAttribute datatype="TINYINT" id="HIERARCHY_IS_CYCLE"/>
+      <viewAttribute datatype="TINYINT" id="HIERARCHY_IS_ORPHAN"/>
+      <viewAttribute datatype="NVARCHAR" length="100" id="PARENT_ID"/>
+      <viewAttribute datatype="NVARCHAR" length="100" id="NODE_ID"/>
+      <viewAttribute datatype="BIGINT" id="START_RANK"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="COUNTRY_HIER" type="generator">
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIERARCHY_RANK" source="HIERARCHY_RANK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIERARCHY_TREE_SIZE" source="HIERARCHY_TREE_SIZE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIERARCHY_PARENT_RANK" source="HIERARCHY_PARENT_RANK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIERARCHY_LEVEL" source="HIERARCHY_LEVEL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIERARCHY_IS_CYCLE" source="HIERARCHY_IS_CYCLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIERARCHY_IS_ORPHAN" source="HIERARCHY_IS_ORPHAN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_ID" source="PARENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NODE_ID" source="NODE_ID"/>
+    </input>
+    <input node="COUNTRY_HIER_IP">
+      <mapping xsi:type="Calculation:AttributeMapping" target="START_RANK" source="START_RANK"/>
+    </input>
+    <hierarchySiblingsParameterization/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Hierarchy_1">
+  <attributes>
+    <attribute id="HIERARCHY_SIBLING_DISTANCE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_SIBLING_DISTANCE"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_SIBLING_DISTANCE"/>
+    </attribute>
+    <attribute id="HIERARCHY_RANK" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_RANK"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_RANK"/>
+    </attribute>
+    <attribute id="HIERARCHY_TREE_SIZE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_TREE_SIZE"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_TREE_SIZE"/>
+    </attribute>
+    <attribute id="HIERARCHY_PARENT_RANK" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_PARENT_RANK"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_PARENT_RANK"/>
+    </attribute>
+    <attribute id="HIERARCHY_LEVEL" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_LEVEL"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_LEVEL"/>
+    </attribute>
+    <attribute id="HIERARCHY_IS_CYCLE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_IS_CYCLE"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_IS_CYCLE"/>
+    </attribute>
+    <attribute id="HIERARCHY_IS_ORPHAN" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIERARCHY_IS_ORPHAN"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="HIERARCHY_IS_ORPHAN"/>
+    </attribute>
+    <attribute id="PARENT_ID" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENT_ID"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="PARENT_ID"/>
+    </attribute>
+    <attribute id="NODE_ID" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NODE_ID"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="NODE_ID"/>
+    </attribute>
+    <attribute id="START_RANK" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="START_RANK"/>
+      <keyMapping columnObjectName="Hierarchy_1" columnName="START_RANK"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Hierarchy_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="K_ANONYMITY_external_table" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" dataCategory="CUBE" cacheInvalidationPeriod="NONE" id="K_ANONYMITY_external_table" applyPrivilegeType="NONE" outputViewType="Aggregation" enforceSqlExecution="false">
 <descriptions defaultDescription="Using K Anonymity"/>
 <localVariables/>
 <variableMappings/>
@@ -11,58 +11,58 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:AnonymizeView" id="JOBS_Anonymized" method="kAnonymity">
     <viewAttributes>
-      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute aggregationType="sum" id="ID"/>
       <viewAttribute id="ORIGIN_COUNTRY"/>
       <viewAttribute id="CURRENT_ROLE"/>
       <viewAttribute id="JOB_LIKES"/>
-      <viewAttribute id="AGE" aggregationType="sum"/>
-      <viewAttribute id="CURRENT_TENURE" aggregationType="sum"/>
+      <viewAttribute aggregationType="sum" id="AGE"/>
+      <viewAttribute aggregationType="sum" id="CURRENT_TENURE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="JOBS">
-      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="ORIGIN_COUNTRY" source="ORIGIN_COUNTRY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENT_ROLE" source="CURRENT_ROLE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOB_LIKES" source="JOB_LIKES"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="AGE" source="AGE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENT_TENURE" source="CURRENT_TENURE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" source="ID" target="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" source="ORIGIN_COUNTRY" target="ORIGIN_COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" source="CURRENT_ROLE" target="CURRENT_ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" source="JOB_LIKES" target="JOB_LIKES"/>
+      <mapping xsi:type="Calculation:AttributeMapping" source="AGE" target="AGE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" source="CURRENT_TENURE" target="CURRENT_TENURE"/>
     </input>
     <anonymizeParameterization>
       <seqColumn>ID</seqColumn>
       <k>2</k>
       <qidColumn id="ORIGIN_COUNTRY"/>
       <qidColumnHierarchy id="ORIGIN_COUNTRY">
-        <hierarchy>COUTRY_DIM</hierarchy>
+        <hierarchy>COUNTRY_HIER</hierarchy>
       </qidColumnHierarchy>
     </anonymizeParameterization>
   </calculationView>
 </calculationViews>
 <logicalModel id="JOBS_Anonymized">
   <attributes>
-    <attribute id="ORIGIN_COUNTRY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ORIGIN_COUNTRY" displayAttribute="false" order="2" attributeHierarchyActive="false">
       <descriptions defaultDescription="ORIGIN_COUNTRY"/>
       <keyMapping columnObjectName="JOBS_Anonymized" columnName="ORIGIN_COUNTRY"/>
     </attribute>
-    <attribute id="CURRENT_ROLE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CURRENT_ROLE" displayAttribute="false" order="3" attributeHierarchyActive="false">
       <descriptions defaultDescription="CURRENT_ROLE"/>
       <keyMapping columnObjectName="JOBS_Anonymized" columnName="CURRENT_ROLE"/>
     </attribute>
-    <attribute id="JOB_LIKES" order="4" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="JOB_LIKES" displayAttribute="false" order="4" attributeHierarchyActive="false">
       <descriptions defaultDescription="JOB_LIKES"/>
       <keyMapping columnObjectName="JOBS_Anonymized" columnName="JOB_LIKES"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="ID" order="1" aggregationType="sum" measureType="simple">
+    <measure aggregationType="sum" id="ID" order="1" measureType="simple">
       <descriptions defaultDescription="Opinion ID"/>
       <measureMapping columnObjectName="JOBS_Anonymized" columnName="ID"/>
     </measure>
-    <measure id="AGE" order="5" aggregationType="sum" measureType="simple">
+    <measure aggregationType="sum" id="AGE" order="5" measureType="simple">
       <descriptions defaultDescription="AGE"/>
       <measureMapping columnObjectName="JOBS_Anonymized" columnName="AGE"/>
     </measure>
-    <measure id="CURRENT_TENURE" order="6" aggregationType="sum" measureType="simple">
+    <measure aggregationType="sum" id="CURRENT_TENURE" order="6" measureType="simple">
       <descriptions defaultDescription="CURRENT_TENURE"/>
       <measureMapping columnObjectName="JOBS_Anonymized" columnName="CURRENT_TENURE"/>
     </measure>
@@ -73,12 +73,12 @@
 </logicalModel>
 <layout>
   <shapes>
-    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+    <shape expanded="true" modelObjectNameSpace="MeasureGroup" modelObjectName="Output">
       <upperLeftCorner x="92" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
-    <shape modelObjectName="JOBS_Anonymized" modelObjectNameSpace="CalculationView" expanded="true">
+    <shape modelObjectNameSpace="CalculationView" expanded="true" modelObjectName="JOBS_Anonymized">
       <upperLeftCorner x="92" y="217"/>
       <rectangleSize width="160"/>
     </shape>
